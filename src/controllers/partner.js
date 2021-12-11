@@ -1,9 +1,42 @@
 const partnerService = require('../services/partner');
 
+const getAll = async (req, res, next) => {
+    try {
+        const result = await partnerService.getAll();
+
+        if (!result) {
+            return res.status(400).json({
+                message: 'Erro ao buscar parceiros',
+            });
+        }
+
+        return res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const result = await partnerService.getById(id);
+
+        if (!result) {
+            return res.status(400).json({
+                message: 'Erro ao buscar parceiro',
+            });
+        }
+
+        return res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 const create = async (req, res, next) => {
     try {
         const { title, address, city, state, description, type } = req.body;
-        
         // validações
     
         const result = await partnerService.create(
@@ -23,5 +56,7 @@ const create = async (req, res, next) => {
 };
 
 module.exports = {
+    getAll,
+    getById,
     create,
 };

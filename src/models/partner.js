@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const { connection } = require('./connection');
 
 const getAll = async () => {
@@ -11,18 +12,18 @@ const getAll = async () => {
 const getById = async (id) => {
     const db = await connection();
 
-    const partner = await db.collection('partners').findOne({ _id: id });
+    const partner = await db.collection('partners').findOne({ _id: ObjectId(id) });
 
     return partner;
 };
 
 const create = async (partner) => {
     const db = await connection();
-
+    
     const { insertedId } = await db.collection('partners').insertOne(partner);
-
+    
     const partnerFound = await getById(insertedId);
-
+    
     return partnerFound;
 };
 
