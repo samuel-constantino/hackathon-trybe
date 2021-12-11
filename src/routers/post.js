@@ -14,4 +14,6 @@ router.get('/:id/partnerPosts', postController.getByPartnerId);
 
 router.post('/:id', postsSchema, postController.create);
 
+router.put('/:id', postsSchema, postController.update);
+
 module.exports = router;

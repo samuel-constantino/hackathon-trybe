@@ -24,9 +24,16 @@ const create = async (post) => {
     return result;
 };
 
+const update = async (post) => {
+    const result = await postModel.update(post);
+    
+    return result;
+};
+
 module.exports = {
     getByPartnerId,
     getAll,
     getById,
     create,
+    update,
 };

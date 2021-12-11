@@ -35,11 +35,24 @@ const create = async (post) => {
     return postFound;
 };
 
-// update
+const update = async (post) => {
+    const db = await connection();
+
+    const query = { _id: ObjectId(post.partnerId) };
+
+    const { modifiedCount } = await db.collection('posts').updateOne(query, { $set: post });
+
+    if (!modifiedCount) return null;
+
+    const postFound = await getById(post.partnerId);
+
+    return postFound;
+};
 
 module.exports = {
     getByPartnerId,
     getAll,
     getById,
     create,
+    update,
 };

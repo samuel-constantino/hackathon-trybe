@@ -74,9 +74,29 @@ const create = async (req, res, next) => {
     }
 };
 
+const update = async (req, res, next) => {
+    try {
+        const { id: partnerId } = req.params;
+        const { grades, comment } = req.body;
+
+        const result = await postService.update({ grades, comment, partnerId });
+
+        if (!result) {
+            return res.status(400).json({
+                message: 'Erro ao atualizar post',
+            });
+        }
+
+        return res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     getAll,
     getById,
     getByPartnerId,
     create,
+    update,
 };
