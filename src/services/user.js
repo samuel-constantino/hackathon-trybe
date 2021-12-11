@@ -1,4 +1,4 @@
-const userModel = require('../models/partner');
+const userModel = require('../models/user');
 
 const getAll = async () => {
     const result = await userModel.getAll();
@@ -12,8 +12,8 @@ const getById = async (id) => {
     return result;
 };
 
-const create = async (partner) => {
-    const result = await userModel.create(partner);
+const create = async (user) => {
+    const result = await userModel.create(user);
     
     return result;
 };

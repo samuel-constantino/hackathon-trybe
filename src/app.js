@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { userRouter, partnerRouter } = require('./routers');
+const { userRouter, partnerRouter, postRouter } = require('./routers');
 const error = require('./middlewares/error');
 
 require('dotenv').config();
@@ -12,6 +12,8 @@ app.use(express.json());
 app.use('/user', userRouter);
 
 app.use('/partner', partnerRouter);
+
+app.use('/post', postRouter);
 
 app.use(error);
 
