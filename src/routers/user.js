@@ -11,4 +11,6 @@ router.get('/:id', userController.getById);
 
 router.post('/', userSchema, userController.create);
 
+router.put('/:id', userSchema, userController.update);
+
 module.exports = router;

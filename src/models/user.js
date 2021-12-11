@@ -27,10 +27,25 @@ const create = async (user) => {
     return userFound;
 };
 
-// update
+const update = async (user) => {
+    const db = await connection();
+
+    const query = { _id: ObjectId(user.id) };
+
+    const { matchedCount } = await db.collection('users').updateOne(query, { $set: user });
+
+    if (!matchedCount) {
+        return null;
+    }
+
+    const userFound = await getById(user.id);
+
+    return userFound;
+};
 
 module.exports = {
     getAll,
     getById,
     create,
+    update,
 };

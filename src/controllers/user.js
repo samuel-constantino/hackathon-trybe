@@ -56,8 +56,30 @@ const create = async (req, res, next) => {
     }
 };
 
+const update = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { name, description, picture, email, password } = req.body;
+
+        const result = await userService.update(
+            { id, name, description, picture, email, password },
+        );
+
+        if (!result) {
+            return res.status(400).json({
+                message: 'Erro ao atualizar usuario',
+            });
+        }
+
+        return res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     getAll,
     getById,
     create,
+    update,
 };
