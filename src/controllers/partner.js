@@ -36,11 +36,11 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
     try {
-        const { title, address, city, state, description, type } = req.body;
+        const { title, address, city, state, picture, description, type } = req.body;
         // validações
     
         const result = await partnerService.create(
-            { title, address, city, state, description, type },
+            { title, address, city, state, picture, description, type },
         );
 
         if (!result) {
