@@ -13,23 +13,14 @@ const OPTIONS = {
 
 let db = null;
 
-// const connection = async () => {
-//     if (db) return Promise.resolve(db);
+const connection = async () => {
+    if (db) return Promise.resolve(db);
 
-//     const conn = await MongoClient.connect(MONGO_DB_URL, OPTIONS);
+    const conn = await MongoClient.connect(MONGO_DB_URL, OPTIONS);
 
-//     db = conn.db(DB_NAME);
+    db = conn.db(DB_NAME);
     
-//     return db;
-// };
-
-const connection = () => MongoClient.connect(MONGO_DB_URL, OPTIONS)
-    .then((conn) => {
-        db = conn.db(DB_NAME);
-        return db;
-    }).catch((err) => {
-        console.error(err);
-        console.exit();
-    }); 
+    return db;
+};
 
 module.exports = { connection };
