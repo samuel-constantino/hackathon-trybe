@@ -30,10 +30,17 @@ const update = async (post) => {
     return result;
 };
 
+const remove = async (id) => {
+    const result = await postModel.remove(id);
+    
+    return result;
+};
+
 module.exports = {
     getByPartnerId,
     getAll,
     getById,
     create,
     update,
+    remove,
 };

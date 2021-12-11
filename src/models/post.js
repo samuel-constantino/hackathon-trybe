@@ -49,10 +49,21 @@ const update = async (post) => {
     return postFound;
 };
 
+const remove = async (id) => {
+    const db = await connection();
+
+    const { deletedCount } = await db.collection('posts').deleteOne({ _id: ObjectId(id) });
+
+    if (!deletedCount) return null;
+
+    return { message: 'Post removido' };
+};
+
 module.exports = {
     getByPartnerId,
     getAll,
     getById,
     create,
     update,
+    remove,
 };
