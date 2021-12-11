@@ -24,9 +24,16 @@ const update = async (partner) => {
     return result;
 };
 
+const remove = async (id) => {
+    const result = await partnerModel.remove(id);
+
+    return result;
+};
+
 module.exports = {
     getAll,
     getById,
     create,
     update,
+    remove,
 };

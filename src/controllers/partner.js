@@ -75,9 +75,28 @@ const update = async (req, res, next) => {
     }
 };
 
+const remove = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const result = await partnerService.remove(id);
+
+        if (!result) {
+            return res.status(400).json({
+                message: 'Erro ao remover parceiro',
+            });
+        }
+
+        return res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     getAll,
     getById,
     create,
     update,
+    remove,
 };

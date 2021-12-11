@@ -43,9 +43,24 @@ const update = async (partner) => {
     return partnerFound;
 };
 
+const remove = async (id) => {
+    const db = await connection();
+
+    const query = { _id: ObjectId(id) };
+
+    const { deletedCount } = await db.collection('partners').deleteOne(query);
+
+    if (!deletedCount) {
+        return null;
+    }
+
+    return { message: 'Parceiro removido' };
+};
+
 module.exports = {
     getAll,
     getById,
     create,
     update,
+    remove,
 };
