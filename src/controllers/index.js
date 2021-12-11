@@ -1,5 +1,7 @@
-const partner = require('./partner.js');
+const partnerController = require('./partner');
+const userController = require('./user');
 
 module.exports = {
-    partner,
+    partnerController,
+    userController,
 };
