@@ -43,9 +43,24 @@ const update = async (user) => {
     return userFound;
 };
 
+const remove = async (id) => {
+    const db = await connection();
+
+    const query = { _id: ObjectId(id) };
+
+    const { deletedCount } = await db.collection('users').deleteOne(query);
+
+    if (!deletedCount) {
+        return null;
+    }
+
+    return { message: 'Usuário deletado' };
+};
+
 module.exports = {
     getAll,
     getById,
     create,
     update,
+    remove,
 };

@@ -24,9 +24,16 @@ const update = async (user) => {
     return result;
 };
 
+const remove = async (id) => {
+    const result = await userModel.remove(id);
+
+    return result;
+};
+
 module.exports = {
     getAll,
     getById,
     create,
     update,
+    remove,
 };
