@@ -57,8 +57,6 @@ const create = async (req, res, next) => {
         // userId deverá vir do token
         const { grades, userId, comment } = req.body;
         const { id: partnerId } = req.params;
-
-        // validações
     
         const result = await postService.create(
             { grades, userId, comment, partnerId },
