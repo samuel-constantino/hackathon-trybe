@@ -32,9 +32,9 @@ const update = async (user) => {
 
     const query = { _id: ObjectId(user.id) };
 
-    const { matchedCount } = await db.collection('users').updateOne(query, { $set: user });
+    const { modifiedCount } = await db.collection('users').updateOne(query, { $set: user });
 
-    if (!matchedCount) {
+    if (!modifiedCount) {
         return null;
     }
 

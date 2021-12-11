@@ -54,8 +54,30 @@ const create = async (req, res, next) => {
     }
 };
 
+const update = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { title, address, city, state, picture, description, type } = req.body;
+
+        const result = await partnerService.update(
+            { id, title, address, city, state, picture, description, type },
+        );
+
+        if (!result) {
+            return res.status(400).json({
+                message: 'Erro ao atualizar parceiro',
+            });
+        }
+
+        return res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     getAll,
     getById,
     create,
+    update,
 };

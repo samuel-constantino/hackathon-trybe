@@ -27,10 +27,25 @@ const create = async (partner) => {
     return partnerFound;
 };
 
-// update
+const update = async (partner) => {
+    const db = await connection();
+
+    const query = { _id: ObjectId(partner.id) };
+
+    const { modifiedCount } = await db.collection('partners').updateOne(query, { $set: partner });
+
+    if (!modifiedCount) {
+        return null;
+    }
+
+    const partnerFound = await getById(partner.id);
+
+    return partnerFound;
+};
 
 module.exports = {
     getAll,
     getById,
     create,
+    update,
 };

@@ -18,8 +18,15 @@ const create = async (partner) => {
     return result;
 };
 
+const update = async (partner) => {
+    const result = await partnerModel.update(partner);
+
+    return result;
+};
+
 module.exports = {
     getAll,
     getById,
     create,
+    update,
 };

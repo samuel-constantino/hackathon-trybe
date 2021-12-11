@@ -12,4 +12,6 @@ router.get('/:id', partnerController.getById);
 
 router.post('/', partnerSchema, partnerController.create);
 
+router.put('/:id', partnerSchema, partnerController.update);
+
 module.exports = router;
