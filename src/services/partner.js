@@ -1,11 +1,29 @@
 const partnerModel = require('../models/partner');
 const postsModel = require('../models/post');
 
-const getAll = async () => {
-    const partners = await partnerModel.getAll();
+const getAvgRating = (posts) => {
+    const gradesAll = posts.map(({ grades }) => grades);
 
-    const posts = await postsModel.getAll();
+    const gradesArray = Object.values(gradesAll);
+    console.log(gradesArray);
+    const avgRating = gradesAll.reduce((acc, curr) => acc + curr, 0) / gradesAll.length;
 
+    return avgRating;
+};
+
+const getPartnersWithPostsAndAvgRating = (partners) => {
+    const partnersWithPostsAndAvgRating = partners.map((partner) => {
+        const partnerWithPostsAndAvgRating = partner;
+
+        partnerWithPostsAndAvgRating.avgRating = getAvgRating(partner.posts);
+
+        return partnerWithPostsAndAvgRating;
+    });
+
+    return partnersWithPostsAndAvgRating;
+};
+
+const getPartnersWithPosts = (partners, posts) => {
     const partnersWithPosts = partners.map((partner) => {
         const partnerWithPosts = partner;
 
@@ -19,6 +37,18 @@ const getAll = async () => {
     });
 
     return partnersWithPosts;
+};
+
+const getAll = async () => {
+    const partners = await partnerModel.getAll();
+
+    const posts = await postsModel.getAll();
+
+    const partnersWithPosts = getPartnersWithPosts(partners, posts);
+
+    const partnersWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnersWithPosts);
+
+    return partnersWithPostsAndAvgRating;
 };
 
 const getById = async (id) => {
