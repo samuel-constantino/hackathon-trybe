@@ -1,27 +1,41 @@
 const userModel = require('../models/user');
 
 const getAll = async () => {
-    const result = await userModel.getAll();
+    const users = await userModel.getAll();
 
-    return result;
+    const usersWhitoutPassword = users.map((user) => {
+        const { password, ...userWithoutPassword } = user;
+
+        return userWithoutPassword;
+    });
+
+    return usersWhitoutPassword;
 };
 
 const getById = async (id) => {
-    const result = await userModel.getById(id);
+    const user = await userModel.getById(id);
+    
+    const { password, ...userWithoutPassword } = user;
 
-    return result;
+    return userWithoutPassword;
 };
 
 const create = async (user) => {
-    const result = await userModel.create(user);
+    const userCreated = await userModel.create(user);
+
+    const { password, ...userWithoutPassword } = userCreated;
     
-    return result;
+    return userWithoutPassword;
 };
 
 const update = async (user) => {
-    const result = await userModel.update(user);
+    const userUpdated = await userModel.update(user);
 
-    return result;
+    if (!userUpdated) return null;
+
+    const { password, ...userWithoutPassword } = userUpdated;
+
+    return userWithoutPassword;
 };
 
 const remove = async (id) => {
