@@ -37,8 +37,6 @@ const getById = async (req, res, next) => {
 const create = async (req, res, next) => {
     try {
         const { name, description, picture, email, password } = req.body;
-
-        // validações
     
         const result = await userService.create(
             { name, description, picture, email, password },
