@@ -16,13 +16,13 @@ const getAvgRating = (posts) => {
 
     const avgRating = (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
 
-    return ([
-            (avgRating).toFixed(1),
-            (avgs[0] / posts.length).toFixed(1),
-            (avgs[1] / posts.length).toFixed(1), 
-            (avgs[2] / posts.length).toFixed(1), 
-            (avgs[3] / posts.length).toFixed(1),
-        ]);
+    return ({
+            avgTotal: (avgRating).toFixed(1),
+            avgDistancingAviability: (avgs[0] / posts.length).toFixed(1),
+            avgAlcoholAviability: (avgs[1] / posts.length).toFixed(1), 
+            avgCleanliness: (avgs[2] / posts.length).toFixed(1), 
+            avgMaskUsage: (avgs[3] / posts.length).toFixed(1),
+    });
 };
 
 const getPartnersWithPostsAndAvgRating = (partners) => {
