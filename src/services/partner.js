@@ -1,98 +1,115 @@
+/* eslint-disable camelcase */
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
 const partnerModel = require('../models/partner');
 const postsModel = require('../models/post');
 
 const getAvgRating = (posts) => {
-    const gradesAll = posts.map(({ grades }) => grades);
+  const gradesAll = posts.map(({ grades }) => grades);
 
-    const gradesArray = Object.values(gradesAll);
-    const avgs = [0, 0, 0, 0, 0];
+  const gradesArray = Object.values(gradesAll);
+  const avgs = [0, 0, 0, 0, 0];
 
-    for (let i = 0; i < gradesArray.length; i += 1) {
-        avgs[0] += gradesArray[i].distancingAviability;
-        avgs[1] += gradesArray[i].alcoholAviability;
-        avgs[2] += gradesArray[i].cleanliness;
-        avgs[3] += gradesArray[i].maskUsage;
-    }
+  for (let i = 0; i < gradesArray.length; i += 1) {
+    avgs[0] += gradesArray[i].distancingAviability;
+    avgs[1] += gradesArray[i].alcoholAviability;
+    avgs[2] += gradesArray[i].cleanliness;
+    avgs[3] += gradesArray[i].maskUsage;
+  }
 
-    const avgRating = (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
+  const avgRating = (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
 
-    return ({
-            avgTotal: (avgRating).toFixed(1),
-            avgDistancingAviability: (avgs[0] / posts.length).toFixed(1),
-            avgAlcoholAviability: (avgs[1] / posts.length).toFixed(1), 
-            avgCleanliness: (avgs[2] / posts.length).toFixed(1), 
-            avgMaskUsage: (avgs[3] / posts.length).toFixed(1),
-    });
+  return {
+    avgTotal: avgRating.toFixed(1),
+    avgDistancingAviability: (avgs[0] / posts.length).toFixed(1),
+    avgAlcoholAviability: (avgs[1] / posts.length).toFixed(1),
+    avgCleanliness: (avgs[2] / posts.length).toFixed(1),
+    avgMaskUsage: (avgs[3] / posts.length).toFixed(1),
+  };
 };
 
 const getPartnersWithPostsAndAvgRating = (partners) => {
-    const partnersWithPostsAndAvgRating = partners.map((partner) => {
-        const partnerWithPostsAndAvgRating = partner;
+  const partnersWithPostsAndAvgRating = partners.map((partner) => {
+    const partnerWithPostsAndAvgRating = partner;
 
-        partnerWithPostsAndAvgRating.avgRating = getAvgRating(partner.posts);
+    partnerWithPostsAndAvgRating.avgRating = getAvgRating(partner.posts);
 
-        return partnerWithPostsAndAvgRating;
-    });
+    return partnerWithPostsAndAvgRating;
+  });
 
-    return partnersWithPostsAndAvgRating;
+  return partnersWithPostsAndAvgRating;
 };
 
 const getPartnersWithPosts = (partners, posts) => {
-    const partnersWithPosts = partners.map((partner) => {
-        const partnerWithPosts = partner;
+  const partnersWithPosts = partners.map((partner) => {
+    const partnerWithPosts = partner;
 
-        partnerWithPosts.posts = posts.filter((post) => {
-            const { _id: partnerId } = partner;
+    partnerWithPosts.posts = posts.filter((post) => {
+      const { _id: partnerId } = partner;
 
-            return post.partnerId === partnerId.toString();
-        });
-
-        return partnerWithPosts;
+      return post.partnerId === partnerId.toString();
     });
 
-    return partnersWithPosts;
+    return partnerWithPosts;
+  });
+
+  return partnersWithPosts;
 };
 
 const getAll = async () => {
-    const partners = await partnerModel.getAll();
+  const partners = await partnerModel.getAll();
 
-    const posts = await postsModel.getAll();
+  const posts = await postsModel.getAll();
 
-    const partnersWithPosts = getPartnersWithPosts(partners, posts);
+  const partnersWithPosts = getPartnersWithPosts(partners, posts);
 
-    const partnersWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnersWithPosts);
+  const partnersWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnersWithPosts);
 
-    return partnersWithPostsAndAvgRating;
+  return partnersWithPostsAndAvgRating;
 };
 
 const getById = async (id) => {
-    const result = await partnerModel.getById(id);
+  const result = await partnerModel.getById(id);
 
-    return result;
+  return result;
 };
 
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
+
 const create = async (partner) => {
-    const result = await partnerModel.create(partner);
-    
-    return result;
+  try {
+    const picUrl = await cloudinary.uploader.upload(partner.picture);
+    let partnerPicture = partner.picture;
+    partnerPicture = picUrl.secure_url;
+  } catch (error) {
+    console.log(error);
+  }
+
+  const result = await partnerModel.create(partner);
+
+  return result;
 };
 
 const update = async (partner) => {
-    const result = await partnerModel.update(partner);
+  const result = await partnerModel.update(partner);
 
-    return result;
+  return result;
 };
 
 const remove = async (id) => {
-    const result = await partnerModel.remove(id);
+  const result = await partnerModel.remove(id);
 
-    return result;
+  return result;
 };
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    remove,
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
 };
