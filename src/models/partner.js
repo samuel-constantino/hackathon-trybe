@@ -20,7 +20,7 @@ const getById = async (id) => {
 const create = async (partner) => {
     const db = await connection();
     
-    const { insertedId } = await db.collection('partners').insertOne(partner);
+    const { insertedId } = await db.collection('partners').insertOne({ ...partner, posts: [] });
     
     const partnerFound = await getById(insertedId);
     

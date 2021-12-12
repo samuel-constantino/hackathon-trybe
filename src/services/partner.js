@@ -1,23 +1,24 @@
 const partnerModel = require('../models/partner');
 const postsModel = require('../models/post');
 
-const addPosts = (posts) => {
-    
-};
-
 const getAll = async () => {
     const partners = await partnerModel.getAll();
 
     const posts = await postsModel.getAll();
 
-    partners.forEach((partner) => {
-        partner.posts = posts.filter((post) => {
-            const { _id: partnerId } = partners;
+    const partnersWithPosts = partners.map((partner) => {
+        const partnerWithPosts = partner;
+
+        partnerWithPosts.posts = posts.filter((post) => {
+            const { _id: partnerId } = partner;
+
             return post.partnerId === partnerId.toString();
         });
+
+        return partnerWithPosts;
     });
 
-    return partners;
+    return partnersWithPosts;
 };
 
 const getById = async (id) => {
