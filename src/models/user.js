@@ -21,7 +21,7 @@ const create = async (user) => {
     const db = await connection();
     
     const { insertedId } = await db.collection('users').insertOne(user);
-    
+    // retornar token ao invés do usuário criado
     const userFound = await getById(insertedId);
     
     return userFound;
