@@ -122,3 +122,157 @@ Requisições para a API devem seguir os padrões:
 	  "message": "Usuário deletado"
 	}
 	```
+
+### Parceiros
+
+1. GET /partner
+
+	Consulta todos os parceiros
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	[
+	  {
+	    "_id": "61b6582576da8df9de74fbe4",
+	    "title": "Parceiro",
+	    "address": "Avenida Sanitária, 502",
+	    "city": "Belo Horizonte",
+	    "state": "MG",
+	    "picture": "URL",
+	    "description": "Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH",
+	    "type": "Hospedagem",
+	    "posts": [
+	      {
+	        "_id": "61b6598776da8df9de74fbe7",
+	        "grades": {
+	          "distancingAviability": 3,
+	          "alcoholAviability": 4,
+	          "cleanliness": 2,
+	          "maskUsage": 8
+	        },
+	        "userId": "61b6589f76da8df9de74fbe5",
+	        "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
+	        "partnerId": "61b6582576da8df9de74fbe4",
+	        "postedAt": "2021-12-12T20:20:23.509Z"
+	      }
+	    ],
+	    "avgRating": {
+	      "avgTotal": "4.3",
+	      "avgDistancingAviability": "3.0",
+	      "avgAlcoholAviability": "4.0",
+	      "avgCleanliness": "2.0",
+	      "avgMaskUsage": "8.0"
+	    }
+	  }
+	]
+	```
+2. GET /partner/:id
+
+	Consulta parceiro pelo ID
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "_id": "61b6582576da8df9de74fbe4",
+	  "title": "Parceiro",
+	  "address": "Avenida Sanitária, 502",
+	  "city": "Belo Horizonte",
+	  "state": "MG",
+	  "picture": "URL",
+	  "description": "Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH",
+	  "type": "Hospedagem",
+	  "posts": [
+	    {
+	      "_id": "61b6598776da8df9de74fbe7",
+	      "grades": {
+	        "distancingAviability": 3,
+	        "alcoholAviability": 4,
+	        "cleanliness": 2,
+	        "maskUsage": 8
+	      },
+	      "userId": "61b6589f76da8df9de74fbe5",
+	      "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
+	      "partnerId": "61b6582576da8df9de74fbe4",
+	      "postedAt": "2021-12-12T20:20:23.509Z"
+	    }
+	  ],
+	  "avgRating": {
+	    "avgTotal": "4.3",
+	    "avgDistancingAviability": "3.0",
+	    "avgAlcoholAviability": "4.0",
+	    "avgCleanliness": "2.0",
+	    "avgMaskUsage": "8.0"
+	  }
+	}
+	```
+3. POST /partner/
+
+	Cria novo parceiro
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "_id": "61b6582576da8df9de74fbe4",
+	  "title": "Parceiro",
+	  "address": "Avenida Sanitária, 502",
+	  "city": "Belo Horizonte",
+	  "state": "MG",
+	  "picture": "URL",
+	  "description": "Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH",
+	  "type": "Hospedagem",
+	  "posts": [],
+	  "avgRating": {}
+	}
+	```
+4. PUT /parceiro/:id
+
+	Atualiza parceiro pelo ID
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "_id": "61b6582576da8df9de74fbe4",
+	  "title": "Parceiro 2",
+	  "address": "Avenida Sanitária, 502",
+	  "city": "Belo Horizonte",
+	  "state": "MG",
+	  "picture": "URL",
+	  "description": "Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH Hotel localizado na zona central de BH",
+	  "type": "Hospedagem"
+	}
+	```
+4. DELETE /partner/:id
+
+	Deleta parceiro pelo ID
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "message": "Parceiro removido"
+	}
+	```
