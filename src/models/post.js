@@ -28,7 +28,8 @@ const getById = async (id) => {
 const create = async (post) => {
     const db = await connection();
     
-    const { insertedId } = await db.collection('posts').insertOne(post);
+    const { insertedId } = await db.collection('posts')
+        .insertOne({ ...post, postedAt: new Date() });
     
     const postFound = await getById(insertedId);
     

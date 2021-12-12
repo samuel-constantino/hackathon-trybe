@@ -1,8 +1,56 @@
 const partnerModel = require('../models/partner');
 const postsModel = require('../models/post');
 
-const addPosts = (posts) => {
-    
+const getAvgRating = (posts) => {
+    const gradesAll = posts.map(({ grades }) => grades);
+
+    const gradesArray = Object.values(gradesAll);
+    const avgs = [0, 0, 0, 0, 0];
+
+    for (let i = 0; i < gradesArray.length; i += 1) {
+        avgs[0] += gradesArray[i].distancingAviability;
+        avgs[1] += gradesArray[i].alcoholAviability;
+        avgs[2] += gradesArray[i].cleanliness;
+        avgs[3] += gradesArray[i].maskUsage;
+    }
+
+    const avgRating = (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
+
+    return ({
+            avgTotal: (avgRating).toFixed(1),
+            avgDistancingAviability: (avgs[0] / posts.length).toFixed(1),
+            avgAlcoholAviability: (avgs[1] / posts.length).toFixed(1), 
+            avgCleanliness: (avgs[2] / posts.length).toFixed(1), 
+            avgMaskUsage: (avgs[3] / posts.length).toFixed(1),
+    });
+};
+
+const getPartnersWithPostsAndAvgRating = (partners) => {
+    const partnersWithPostsAndAvgRating = partners.map((partner) => {
+        const partnerWithPostsAndAvgRating = partner;
+
+        partnerWithPostsAndAvgRating.avgRating = getAvgRating(partner.posts);
+
+        return partnerWithPostsAndAvgRating;
+    });
+
+    return partnersWithPostsAndAvgRating;
+};
+
+const getPartnersWithPosts = (partners, posts) => {
+    const partnersWithPosts = partners.map((partner) => {
+        const partnerWithPosts = partner;
+
+        partnerWithPosts.posts = posts.filter((post) => {
+            const { _id: partnerId } = partner;
+
+            return post.partnerId === partnerId.toString();
+        });
+
+        return partnerWithPosts;
+    });
+
+    return partnersWithPosts;
 };
 
 const getAll = async () => {
@@ -10,14 +58,11 @@ const getAll = async () => {
 
     const posts = await postsModel.getAll();
 
-    partners.forEach((partner) => {
-        partner.posts = posts.filter((post) => {
-            const { _id: partnerId } = partners;
-            return post.partnerId === partnerId.toString();
-        });
-    });
+    const partnersWithPosts = getPartnersWithPosts(partners, posts);
 
-    return partners;
+    const partnersWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnersWithPosts);
+
+    return partnersWithPostsAndAvgRating;
 };
 
 const getById = async (id) => {
