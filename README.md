@@ -276,3 +276,148 @@ Requisições para a API devem seguir os padrões:
 	  "message": "Parceiro removido"
 	}
 	```
+### Posts
+
+1. GET /post
+
+	Consulta todos os posts
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	[
+	  {
+	    "_id": "61b6598776da8df9de74fbe7",
+	    "grades": {
+	      "distancingAviability": 3,
+	      "alcoholAviability": 4,
+	      "cleanliness": 2,
+	      "maskUsage": 8
+	    },
+	    "userId": "61b6589f76da8df9de74fbe5",
+	    "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
+	    "partnerId": "61b6582576da8df9de74fbe4",
+	    "postedAt": "2021-12-12T20:20:23.509Z"
+	  }
+	]	
+	```
+2. GET /post/:id
+
+	Consulta post pelo ID
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "_id": "61b6598776da8df9de74fbe7",
+	  "grades": {
+	    "distancingAviability": 3,
+	    "alcoholAviability": 4,
+	    "cleanliness": 2,
+	    "maskUsage": 8
+	  },
+	  "userId": "61b6589f76da8df9de74fbe5",
+	  "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
+	  "partnerId": "61b6582576da8df9de74fbe4",
+	  "postedAt": "2021-12-12T20:20:23.509Z"
+	}
+	```
+3. GET /post/:id/partnerPosts
+
+	Consulta posts de parceiro pelo ID
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	[
+	  {
+	    "_id": "61b6598776da8df9de74fbe7",
+	    "grades": {
+	      "distancingAviability": 3,
+	      "alcoholAviability": 4,
+	      "cleanliness": 2,
+	      "maskUsage": 8
+	    },
+	    "userId": "61b6589f76da8df9de74fbe5",
+	    "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
+	    "partnerId": "61b6582576da8df9de74fbe4",
+	    "postedAt": "2021-12-12T20:20:23.509Z"
+	  }
+	]
+	```
+4. POST /post/
+
+	Cria novo post
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "_id": "61b6598776da8df9de74fbe7",
+	  "grades": {
+	    "distancingAviability": 3,
+	    "alcoholAviability": 4,
+	    "cleanliness": 2,
+	    "maskUsage": 8
+	  },
+	  "userId": "61b6589f76da8df9de74fbe5",
+	  "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
+	  "partnerId": "61b6582576da8df9de74fbe4",
+	  "postedAt": "2021-12-12T20:20:23.509Z"
+	}
+	```
+5. PUT /post/:id
+
+	Atualiza post pelo ID
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "_id": "61b50e8bed54e5bbf5b70ef5",
+	  "grades": {
+	    "distancingAviability": 2,
+	    "alcoholAviability": 1,
+	    "cleanliness": 1,
+	    "maskUsage": 1
+	  },
+	  "userId": "123",
+	  "comment": "teste teste teste teste teste teste teste teste teste teste teste teste teste ",
+	  "partnerId": "61b50e8bed54e5bbf5b70ef5"
+	}
+	```
+6. DELETE /post/:id
+
+	Deleta post pelo ID
+	
+	- Request (aplication/json):
+		- Headers
+		
+			`  Authorization: Bearer [access_token]`
+			
+	- Response 200 (application/json)
+	```
+	{
+	  "message": "Post removido"
+	}
+	```
