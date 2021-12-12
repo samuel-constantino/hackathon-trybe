@@ -4,7 +4,9 @@ require('dotenv').config();
 
 const DB_NAME = 'hackathon';
 
-const MONGO_DB_URL = `mongodb://${process.env.HOST || 'localhost'}:27017/hackathon`;
+const MONGO_DB_URL = `mongodb+srv://grupo2:${process.env.ATLAS_PASSWORD}@cluster0.htc21.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+
+
 
 const OPTIONS = {
     useNewUrlParser: true,
