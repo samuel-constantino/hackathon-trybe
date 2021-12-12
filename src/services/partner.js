@@ -5,10 +5,24 @@ const getAvgRating = (posts) => {
     const gradesAll = posts.map(({ grades }) => grades);
 
     const gradesArray = Object.values(gradesAll);
-    console.log(gradesArray);
-    const avgRating = gradesAll.reduce((acc, curr) => acc + curr, 0) / gradesAll.length;
+    const avgs = [0, 0, 0, 0, 0];
 
-    return avgRating;
+    for (let i = 0; i < gradesArray.length; i += 1) {
+        avgs[0] += gradesArray[i].distancingAviability;
+        avgs[1] += gradesArray[i].alcoholAviability;
+        avgs[2] += gradesArray[i].cleanliness;
+        avgs[3] += gradesArray[i].maskUsage;
+    }
+
+    const avgRating = (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
+
+    return ([
+            (avgRating).toFixed(1),
+            (avgs[0] / posts.length).toFixed(1),
+            (avgs[1] / posts.length).toFixed(1), 
+            (avgs[2] / posts.length).toFixed(1), 
+            (avgs[3] / posts.length).toFixed(1),
+        ]);
 };
 
 const getPartnersWithPostsAndAvgRating = (partners) => {
