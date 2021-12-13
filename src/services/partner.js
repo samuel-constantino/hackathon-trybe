@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
-const partnerModel = require("../models/partner");
-const postsModel = require("../models/post");
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+const partnerModel = require('../models/partner');
+const postsModel = require('../models/post');
 
 const getAvgRating = (posts) => {
   const gradesAll = posts.map(({ grades }) => grades);
@@ -17,8 +17,7 @@ const getAvgRating = (posts) => {
     avgs[3] += gradesArray[i].maskUsage;
   }
 
-  const avgRating =
-    (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
+  const avgRating = (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
 
   return {
     avgTotal: avgRating.toFixed(1),
@@ -64,8 +63,7 @@ const getAll = async () => {
 
   const partnersWithPosts = getPartnersWithPosts(partners, posts);
 
-  const partnersWithPostsAndAvgRating =
-    getPartnersWithPostsAndAvgRating(partnersWithPosts);
+  const partnersWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnersWithPosts);
 
   return partnersWithPostsAndAvgRating;
 };
@@ -77,8 +75,7 @@ const getById = async (id) => {
 
   const partnerWithPosts = getPartnersWithPosts([partner], posts);
 
-  const partnerWithPostsAndAvgRating =
-    getPartnersWithPostsAndAvgRating(partnerWithPosts);
+  const partnerWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnerWithPosts);
 
   return partnerWithPostsAndAvgRating[0];
 };

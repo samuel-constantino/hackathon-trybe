@@ -14,6 +14,6 @@ router.post('/', partnerSchema, auth, partnerController.create);
 
 router.put('/:id', partnerSchema, auth, partnerController.update);
 
-router.delete('/:id', partnerController.remove);
+router.delete('/:id', auth, partnerController.remove);
 
 module.exports = router;

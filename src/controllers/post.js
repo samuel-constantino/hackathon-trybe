@@ -1,4 +1,5 @@
 const postService = require('../services/post');
+const { UNAUTHORIZED } = require('../erros');
 
 const getByPartnerId = async (req, res, next) => {
     try {
@@ -54,18 +55,13 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
     try {
-        // userId deverá vir do token
         const { grades, userId, comment } = req.body;
         const { id: partnerId } = req.params;
     
-        const result = await postService.create(
-            { grades, userId, comment, partnerId },
-        );
+        const result = await postService.create({ grades, userId, comment, partnerId });
 
         if (!result) {
-            return res.status(400).json({
-                message: 'Erro ao cadastrar post',
-            });
+            return res.status(400).json({ message: 'Erro ao cadastrar post' });
         }
 
         return res.status(201).json(result);
@@ -78,6 +74,11 @@ const update = async (req, res, next) => {
     try {
         const { id: partnerId } = req.params;
         const { grades, comment } = req.body;
+        const { _id: userTokenId, role } = req.user;
+
+        const partnerFound = await postService.getByPartnerId(partnerId);
+
+        if (partnerFound.userId !== userTokenId && role !== 'admin') return UNAUTHORIZED;
 
         const result = await postService.update({ grades, comment, partnerId });
 
@@ -95,9 +96,14 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const { id: partnerId } = req.params;
+        const { _id: userTokenId, role } = req.user;
 
-        const result = await postService.remove(id);
+        const partnerFound = await postService.getByPartnerId(partnerId);
+
+        if (partnerFound.userId !== userTokenId && role !== 'admin') return UNAUTHORIZED;
+
+        const result = await postService.remove(partnerId);
 
         if (!result) {
             return res.status(400).json({
