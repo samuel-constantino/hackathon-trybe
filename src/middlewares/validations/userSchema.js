@@ -5,7 +5,7 @@ const userSchema = async (req, res, next) => {
 
     const schema = joi.object({
         name: joi.string().required().min(3).max(30),
-        description: joi.string().required().min(50).max(5000),
+        description: joi.string().required().min(5).max(5000),
         picture: joi.string().required(),
         email: joi.string().email().required(),
         password: joi.string().required().min(6).max(30),
