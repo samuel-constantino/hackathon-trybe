@@ -13,7 +13,7 @@ const userSchema = async (req, res, next) => {
             maskUsage: joi.number().required(),
         }).required(),
         userId: joi.string().required(),
-        comment: joi.string().required().min(10).max(200),
+        comment: joi.string().required().min(10).max(2000),
         partnerId: joi.string().required(),
     });
 
