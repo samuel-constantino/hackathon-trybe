@@ -17,6 +17,14 @@ const getById = async (id) => {
     return user;
 };
 
+const getByEmail = async (email) => {
+    const db = await connection();
+
+    const userFound = await db.collection('users').findOne({ email });
+
+    return userFound;
+};
+
 const create = async (user) => {
     const db = await connection();
     
@@ -60,6 +68,7 @@ const remove = async (id) => {
 module.exports = {
     getAll,
     getById,
+    getByEmail,
     create,
     update,
     remove,
