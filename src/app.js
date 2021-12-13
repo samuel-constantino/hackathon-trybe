@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { userRouter, partnerRouter, postRouter } = require('./routers');
+const { loginRouter, userRouter, partnerRouter, postRouter } = require('./routers');
 const error = require('./middlewares/error');
 
 require('dotenv').config();
@@ -16,6 +16,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.status(200).send('Hello World!');
 });
+
+app.use('/login', loginRouter);
 
 app.use('/user', userRouter);
 
