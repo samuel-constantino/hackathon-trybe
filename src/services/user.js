@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
-const userModel = require("../models/user");
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+const userModel = require('../models/user');
 
 const getAll = async () => {
   const users = await userModel.getAll();
