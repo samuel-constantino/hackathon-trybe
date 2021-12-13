@@ -368,8 +368,8 @@ Requisições para a API devem seguir os padrões:
 	    "cleanliness": 1,
 	    "maskUsage": 1
 	  },
-	  "userId": "123",
-	  "comment": "teste teste teste teste teste teste teste teste teste teste teste teste teste ",
+	  "userId": "61b6589f76da8df9de74fbe5",
+	  "comment": "Local muito agradável, com banheiros limpos e disponibilidade de álcool em gel em todos os cômudos. ",
 	  "partnerId": "61b50e8bed54e5bbf5b70ef5"
 	}
 	```
