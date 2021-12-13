@@ -69,9 +69,15 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const result = await partnerModel.getById(id);
+    const partner = await partnerModel.getById(id);
 
-  return result;
+    const posts = await postsModel.getAll();
+
+    const partnerWithPosts = getPartnersWithPosts([partner], posts);
+
+    const partnerWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnerWithPosts);
+
+    return partnerWithPostsAndAvgRating[0];
 };
 
 cloudinary.config({
@@ -94,9 +100,11 @@ const create = async (partner) => {
 };
 
 const update = async (partner) => {
-  const result = await partnerModel.update(partner);
+    const partnerUpdated = await partnerModel.update(partner);
 
-  return result;
+    const { posts, avgRating, id, ...rest } = partnerUpdated;
+
+    return rest;
 };
 
 const remove = async (id) => {
