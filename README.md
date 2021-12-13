@@ -32,7 +32,6 @@ Requisições para a API devem seguir os padrões:
 | `201` | Registro criado com sucesso (created).|
 | `400` | Dados da requisição mal formados (bad request).|
 | `404` | Registro pesquisado não encontrado (Not found).|
-| `500` | Erro interno do sistema|
 
 ### Endpoints
 
