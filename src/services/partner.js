@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-const cloudinary = require('cloudinary').v2;
-require('dotenv').config();
-const partnerModel = require('../models/partner');
-const postsModel = require('../models/post');
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+const partnerModel = require("../models/partner");
+const postsModel = require("../models/post");
 
 const getAvgRating = (posts) => {
   const gradesAll = posts.map(({ grades }) => grades);
@@ -17,7 +17,8 @@ const getAvgRating = (posts) => {
     avgs[3] += gradesArray[i].maskUsage;
   }
 
-  const avgRating = (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
+  const avgRating =
+    (avgs[0] + avgs[1] + avgs[2] + avgs[3]) / (gradesArray.length * 4);
 
   return {
     avgTotal: avgRating.toFixed(1),
@@ -63,21 +64,23 @@ const getAll = async () => {
 
   const partnersWithPosts = getPartnersWithPosts(partners, posts);
 
-  const partnersWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnersWithPosts);
+  const partnersWithPostsAndAvgRating =
+    getPartnersWithPostsAndAvgRating(partnersWithPosts);
 
   return partnersWithPostsAndAvgRating;
 };
 
 const getById = async (id) => {
-    const partner = await partnerModel.getById(id);
+  const partner = await partnerModel.getById(id);
 
-    const posts = await postsModel.getAll();
+  const posts = await postsModel.getAll();
 
-    const partnerWithPosts = getPartnersWithPosts([partner], posts);
+  const partnerWithPosts = getPartnersWithPosts([partner], posts);
 
-    const partnerWithPostsAndAvgRating = getPartnersWithPostsAndAvgRating(partnerWithPosts);
+  const partnerWithPostsAndAvgRating =
+    getPartnersWithPostsAndAvgRating(partnerWithPosts);
 
-    return partnerWithPostsAndAvgRating[0];
+  return partnerWithPostsAndAvgRating[0];
 };
 
 cloudinary.config({
@@ -89,22 +92,20 @@ cloudinary.config({
 const create = async (partner) => {
   try {
     const picUrl = await cloudinary.uploader.upload(partner.picture);
-    partner.picture= picUrl.secure_url;
+    partner.picture = picUrl.secure_url;
+    const result = await partnerModel.create(partner);
+    return result;
   } catch (error) {
     console.log(error);
   }
-
-  const result = await partnerModel.create(partner);
-
-  return result;
 };
 
 const update = async (partner) => {
-    const partnerUpdated = await partnerModel.update(partner);
+  const partnerUpdated = await partnerModel.update(partner);
 
-    const { posts, avgRating, id, ...rest } = partnerUpdated;
+  const { posts, avgRating, id, ...rest } = partnerUpdated;
 
-    return rest;
+  return rest;
 };
 
 const remove = async (id) => {
