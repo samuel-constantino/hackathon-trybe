@@ -34,6 +34,7 @@ const getById = async (req, res, next) => {
     }
 };
 
+
 const create = async (req, res, next) => {
     try {
         const { title, address, city, state, picture, description, type } = req.body;

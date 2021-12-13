@@ -13,6 +13,10 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.status(200).send('Hello World!');
+});
+
 app.use('/user', userRouter);
 
 app.use('/partner', partnerRouter);
