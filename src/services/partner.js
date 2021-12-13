@@ -83,8 +83,7 @@ cloudinary.config({
 const create = async (partner) => {
   try {
     const picUrl = await cloudinary.uploader.upload(partner.picture);
-    let partnerPicture = partner.picture;
-    partnerPicture = picUrl.secure_url;
+    partner.picture= picUrl.secure_url;
   } catch (error) {
     console.log(error);
   }
