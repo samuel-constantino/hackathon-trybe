@@ -1,8 +1,8 @@
 const express = require('express');
 
 const partnerController = require('../controllers/partner');
-
 const { partnerSchema } = require('../middlewares/validations');
+const { auth } = require('../middlewares');
 
 const router = express.Router();
 
@@ -10,9 +10,9 @@ router.get('/', partnerController.getAll);
 
 router.get('/:id', partnerController.getById);
 
-router.post('/', partnerSchema, partnerController.create);
+router.post('/', partnerSchema, auth, partnerController.create);
 
-router.put('/:id', partnerSchema, partnerController.update);
+router.put('/:id', partnerSchema, auth, partnerController.update);
 
 router.delete('/:id', partnerController.remove);
 
