@@ -34,15 +34,17 @@ const getById = async (req, res, next) => {
     }
 };
 
-
 const create = async (req, res, next) => {
     try {
         const { title, address, city, state, picture, description, type } = req.body;
-    
+        const { role } = req.user;
+        
+        if (role !== 'admin') return res.status(401).json({ message: 'Acesso negado' });
+
         const result = await partnerService.create(
             { title, address, city, state, picture, description, type },
         );
-
+        
         if (!result) {
             return res.status(400).json({
                 message: 'Erro ao cadastrar parceiro',
@@ -59,6 +61,9 @@ const update = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { title, address, city, state, picture, description, type } = req.body;
+        const { role } = req.user;
+        
+        if (role !== 'admin') return res.status(401).json({ message: 'Acesso negado' });
 
         const result = await partnerService.update(
             { id, title, address, city, state, picture, description, type },
@@ -79,6 +84,9 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
     try {
         const { id } = req.params;
+        const { role } = req.user;
+        
+        if (role !== 'admin') return res.status(401).json({ message: 'Acesso negado' });
 
         const result = await partnerService.remove(id);
 

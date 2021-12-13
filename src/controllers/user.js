@@ -39,7 +39,7 @@ const create = async (req, res, next) => {
         const { name, description, picture, email, password } = req.body;
     
         const result = await userService.create(
-            { name, description, picture, email, password },
+            { name, description, picture, email, password, role: 'user' },
         );
 
         if (!result) {
