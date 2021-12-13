@@ -68,7 +68,7 @@ const create = async (req, res, next) => {
             });
         }
 
-        return res.status(200).json(result);
+        return res.status(201).json(result);
     } catch (error) {
         next(error);
     }
