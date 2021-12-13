@@ -39,12 +39,6 @@ Esta API REST disponibiliza acesso a informações sobre as entidades usuários,
 	npm start
 	```
 
-3. Rode a aplicação no modo desenvolvedor
-
-	```
-	npm run dev
-	```
-
 ## Documentação
 
 ### Métodos
