@@ -1,6 +1,16 @@
 # 1º Hackathon Trybe - Grupo 2
 
-Esta API REST disponibiliza acesso às entidades usuários, parceiros e posts da aplicação [nomeAplicacao](https://www.linkparaaplicacao.com.br).
+Esta API REST disponibiliza acesso a informações sobre as entidades usuários, parceiros e posts da aplicação [Safe Route](https://www.linkparaaplicacao.com.br).
+
+## Sumário
+
+- [Documentação](#documentação)
+	- [Métodos](#métodos) 
+	- [respostas](#respostas)
+	- [EndPoints](#usuários)
+		- [Usuários](#usuários)
+		- [Parceiros](#parceiros)
+		- [Posts](#posts)
 
 ## Documentação
 
