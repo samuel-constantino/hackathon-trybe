@@ -1,8 +1,8 @@
 # 1º Hackathon Trybe - Grupo 2
 
-A [nomeAplicacao](https://www.linkparaaplicacao.com.br) disponibiliza uma API REST que permite o acesso aos usuários, parceiros e posts.
+Esta API REST disponibiliza acesso às entidades usuários, parceiros e posts da aplicação [nomeAplicacao](https://www.linkparaaplicacao.com.br).
 
-## Documentation
+## Documentação
 
 ### Métodos
 Requisições para a API devem seguir os padrões:
