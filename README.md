@@ -1,6 +1,16 @@
 # 1º Hackathon Trybe - Grupo 2
 
-Esta API REST disponibiliza acesso às entidades usuários, parceiros e posts da aplicação [nomeAplicacao](https://www.linkparaaplicacao.com.br).
+Esta API REST disponibiliza acesso a informações sobre as entidades usuários, parceiros e posts da aplicação [Safe Route](https://grupo2-backend.herokuapp.com/).
+
+## Sumário
+
+- [Documentação](#documentação)
+	- [Métodos](#métodos) 
+	- [respostas](#respostas)
+	- [EndPoints](#usuários)
+		- [Usuários](#usuários)
+		- [Parceiros](#parceiros)
+		- [Posts](#posts)
 
 ## Documentação
 
@@ -19,23 +29,17 @@ Requisições para a API devem seguir os padrões:
 | Código | Descrição |
 |---|---|
 | `200` | Requisição executada com sucesso (success).|
-| `400` | Erros de validação ou os campos informados não existem no sistema.|
-| `401` | Dados de acesso inválidos.|
+| `201` | Registro criado com sucesso (created).|
+| `400` | Dados da requisição mal formados (bad request).|
 | `404` | Registro pesquisado não encontrado (Not found).|
-| `500` | Erro interno do sistema|
 
 ### Endpoints
 
 ### Usuários
 
-1. GET /user
+1. **GET /user**
 
 	Consulta todos os usuários
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -49,14 +53,9 @@ Requisições para a API devem seguir os padrões:
 	  }
 	]
 	```
-2. GET /user/:id
+2. **GET /user/:id**
 
 	Consulta usuário pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -69,16 +68,11 @@ Requisições para a API devem seguir os padrões:
 	  "password": "123456"
 	}
 	```
-3. POST /user/
+3. **POST /user/**
 
 	Cria novo usuário
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
-	- Response 200 (application/json)
+	- Response 201 (application/json)
 	```
 	{
 	  "_id": "61b6616bad3de0dc445ef399",
@@ -88,14 +82,9 @@ Requisições para a API devem seguir os padrões:
 	  "email": "tryber@trybe.com"
 	}
 	```
-4. PUT /user/:id
+4. **PUT /user/:id**
 
 	Atualiza usuário pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -107,32 +96,22 @@ Requisições para a API devem seguir os padrões:
 	  "email": "tryber@trybe.com"
 	}
 	```
-4. DELETE /user/:id
+4. **DELETE /user/:id**
 
 	Deleta usuário pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
 	{
-	  "message": "Usuário deletado"
+	  "message": "Usuário removido"
 	}
 	```
 
 ### Parceiros
 
-1. GET /partner
+1. **GET /partner**
 
 	Consulta todos os parceiros
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -153,7 +132,7 @@ Requisições para a API devem seguir os padrões:
 	          "distancingAviability": 3,
 	          "alcoholAviability": 4,
 	          "cleanliness": 2,
-	          "maskUsage": 8
+	          "maskUsage": 5
 	        },
 	        "userId": "61b6589f76da8df9de74fbe5",
 	        "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
@@ -166,19 +145,14 @@ Requisições para a API devem seguir os padrões:
 	      "avgDistancingAviability": "3.0",
 	      "avgAlcoholAviability": "4.0",
 	      "avgCleanliness": "2.0",
-	      "avgMaskUsage": "8.0"
+	      "avgMaskUsage": "5.0"
 	    }
 	  }
 	]
 	```
-2. GET /partner/:id
+2. **GET /partner/:id**
 
 	Consulta parceiro pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -198,7 +172,7 @@ Requisições para a API devem seguir os padrões:
 	        "distancingAviability": 3,
 	        "alcoholAviability": 4,
 	        "cleanliness": 2,
-	        "maskUsage": 8
+	        "maskUsage": 5
 	      },
 	      "userId": "61b6589f76da8df9de74fbe5",
 	      "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
@@ -211,20 +185,15 @@ Requisições para a API devem seguir os padrões:
 	    "avgDistancingAviability": "3.0",
 	    "avgAlcoholAviability": "4.0",
 	    "avgCleanliness": "2.0",
-	    "avgMaskUsage": "8.0"
+	    "avgMaskUsage": "5.0"
 	  }
 	}
 	```
-3. POST /partner/
+3. **POST /partner/**
 
 	Cria novo parceiro
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
-	- Response 200 (application/json)
+	- Response 201 (application/json)
 	```
 	{
 	  "_id": "61b6582576da8df9de74fbe4",
@@ -239,14 +208,9 @@ Requisições para a API devem seguir os padrões:
 	  "avgRating": {}
 	}
 	```
-4. PUT /parceiro/:id
+4. **PUT /parceiro/:id**
 
 	Atualiza parceiro pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -261,14 +225,9 @@ Requisições para a API devem seguir os padrões:
 	  "type": "Hospedagem"
 	}
 	```
-4. DELETE /partner/:id
+4. **DELETE /partner/:id**
 
 	Deleta parceiro pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -278,14 +237,9 @@ Requisições para a API devem seguir os padrões:
 	```
 ### Posts
 
-1. GET /post
+1. **GET /post**
 
 	Consulta todos os posts
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -296,7 +250,7 @@ Requisições para a API devem seguir os padrões:
 	      "distancingAviability": 3,
 	      "alcoholAviability": 4,
 	      "cleanliness": 2,
-	      "maskUsage": 8
+	      "maskUsage": 5
 	    },
 	    "userId": "61b6589f76da8df9de74fbe5",
 	    "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
@@ -305,14 +259,9 @@ Requisições para a API devem seguir os padrões:
 	  }
 	]	
 	```
-2. GET /post/:id
+2. **GET /post/:id**
 
 	Consulta post pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -322,7 +271,7 @@ Requisições para a API devem seguir os padrões:
 	    "distancingAviability": 3,
 	    "alcoholAviability": 4,
 	    "cleanliness": 2,
-	    "maskUsage": 8
+	    "maskUsage": 5
 	  },
 	  "userId": "61b6589f76da8df9de74fbe5",
 	  "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
@@ -330,14 +279,9 @@ Requisições para a API devem seguir os padrões:
 	  "postedAt": "2021-12-12T20:20:23.509Z"
 	}
 	```
-3. GET /post/:id/partnerPosts
+3. **GET /post/:id/partnerPosts**
 
 	Consulta posts de parceiro pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -348,7 +292,7 @@ Requisições para a API devem seguir os padrões:
 	      "distancingAviability": 3,
 	      "alcoholAviability": 4,
 	      "cleanliness": 2,
-	      "maskUsage": 8
+	      "maskUsage": 5
 	    },
 	    "userId": "61b6589f76da8df9de74fbe5",
 	    "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
@@ -357,16 +301,11 @@ Requisições para a API devem seguir os padrões:
 	  }
 	]
 	```
-4. POST /post/
+4. **POST /post/**
 
 	Cria novo post
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
-	- Response 200 (application/json)
+	- Response 201 (application/json)
 	```
 	{
 	  "_id": "61b6598776da8df9de74fbe7",
@@ -374,7 +313,7 @@ Requisições para a API devem seguir os padrões:
 	    "distancingAviability": 3,
 	    "alcoholAviability": 4,
 	    "cleanliness": 2,
-	    "maskUsage": 8
+	    "maskUsage": 5
 	  },
 	  "userId": "61b6589f76da8df9de74fbe5",
 	  "comment": "Ótima hospedagem, lugar muito higiêncio, recomendo demais!!!",
@@ -382,14 +321,9 @@ Requisições para a API devem seguir os padrões:
 	  "postedAt": "2021-12-12T20:20:23.509Z"
 	}
 	```
-5. PUT /post/:id
+5. **PUT /post/:id**
 
 	Atualiza post pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
@@ -406,14 +340,9 @@ Requisições para a API devem seguir os padrões:
 	  "partnerId": "61b50e8bed54e5bbf5b70ef5"
 	}
 	```
-6. DELETE /post/:id
+6. **DELETE /post/:id**
 
 	Deleta post pelo ID
-	
-	- Request (aplication/json):
-		- Headers
-		
-			`  Authorization: Bearer [access_token]`
 			
 	- Response 200 (application/json)
 	```
