@@ -1,5 +1,11 @@
-const partner = require('./partner.js');
+const partnerController = require('./partner');
+const userController = require('./user');
+const postController = require('./post');
+const loginController = require('./login');
 
 module.exports = {
-    partner,
+    partnerController,
+    userController,
+    postController,
+    loginController,
 };
