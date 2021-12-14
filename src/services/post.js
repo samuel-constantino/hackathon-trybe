@@ -1,4 +1,5 @@
 const postModel = require('../models/post');
+const userModel = require('../models/user');
 
 const getByPartnerId = async (partnerId) => {
     const result = await postModel.getByPartnerId(partnerId);
@@ -13,9 +14,13 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-    const result = await postModel.getById(id);
+    const post = await postModel.getById(id);
 
-    return result;
+    const { userId } = post;
+
+    const { name: userName } = await userModel.getById(userId);
+
+    return { ...post, userName };
 };
 
 const create = async (post) => {
